@@ -1,0 +1,31 @@
+name: Linting Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use a stable Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run HTML Lint
+        run: npm run lint:html
+
+      - name: Run CSS Lint
+        run: npm run lint:css
